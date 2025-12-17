@@ -1,0 +1,21 @@
+{
+  "short_name": "Trading Zen",
+  "name": "Trading Zen | 交易外腦",
+  "icons": [
+    {
+      "src": "https://placehold.co/192x192/1c1917/ffffff?text=Zen",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://placehold.co/512x512/1c1917/ffffff?text=Zen",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#fafaf9",
+  "background_color": "#fafaf9",
+  "orientation": "portrait"
+}
