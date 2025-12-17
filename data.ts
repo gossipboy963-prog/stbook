@@ -31,7 +31,7 @@ export const tradingData: StepCategory[] = [
           ],
           combinations: {
             indicators: ['K棒型態 (Candlestick)', '關鍵支撐壓力'],
-            reason: '量只是燃料，K棒才是方向。必須搭配實體紅K（代表收盤意志強）才算數。若是長上影線＋爆量，意義完全相反（主力出貨）。'
+            reason: '量只是燃料，K棒才是方向。必須搭配實體陽線（代表收盤意志強）才算數。若是長上影線＋爆量，意義完全相反（主力出貨）。'
           },
           pitfalls: [
             '高檔噴出後的末升段：這時候的量增往往是散戶接盤，容易買在最高點。',
@@ -91,14 +91,14 @@ export const tradingData: StepCategory[] = [
           whenRising: ['N/A (這是下跌情境)'],
           whenFalling: [
             '趨勢延續：如果在下跌初期或中期，代表大家都在逃，空頭力道極強，切勿接刀。', 
-            '恐慌趕底：若發生在長期下跌後的末段，伴隨長黑K，可能是最後一次清洗浮額（Capitulation）。'
+            '恐慌趕底：若發生在長期下跌後的末段，伴隨長陰線（美股 Red K），可能是最後一次清洗浮額（Capitulation）。'
           ],
           divergence: ['N/A'],
           combinations: { 
             indicators: ['Support Levels', 'Step 5 | RSI'], 
             reason: '看是否跌破關鍵支撐。若跌破且量增，是確認訊號。若RSI進入超賣區鈍化，下跌可能會持續一段時間。' 
           },
-          pitfalls: ['低檔的長黑爆量可能是主力在「壓低吃貨」，製造恐慌讓散戶停損。需觀察後續幾日是否不跌反漲。'],
+          pitfalls: ['低檔的長陰爆量可能是主力在「壓低吃貨」，製造恐慌讓散戶停損。需觀察後續幾日是否不跌反漲。'],
           usageInStep: { role: 'Confirmation', description: '確認空頭趨勢或停損訊號。如果你做多，看到這個必須立刻執行停損。' },
           coachNote: '帶量的下跌是為了告訴你：大家都在逃，火災現場不要當最後一個跑的人。'
         }
@@ -132,9 +132,45 @@ export const tradingData: StepCategory[] = [
           ],
           usageInStep: {
             role: 'Screening',
-            description: '篩選進場時機。我喜歡找「多頭趨勢中，回檔量縮」的股票。這代表清洗浮額，我在等那個「量縮後的出的第一根紅K」。'
+            description: '篩選進場時機。我喜歡找「多頭趨勢中，回檔量縮」的股票。這代表清洗浮額，我在等那個「量縮後出現的第一根陽線」。'
           },
           coachNote: '縮量代表「情緒冷靜」。在大家冷靜的時候佈局，在大家瘋狂（爆量）的時候離場。'
+        }
+      },
+      {
+        id: 's1-pullback-vs-reversal',
+        title: '良性回檔 vs. 趨勢反轉 (Healthy Pullback vs. Reversal)',
+        stepId: 'step-1',
+        stepName: 'Step 1 | 價量行為',
+        tags: ['Correction', 'Trend Change', 'Analysis'],
+        content: {
+          definition: '這是交易中最昂貴的一課。判斷價格下跌是「休息（為了走更遠）」還是「終點（準備回頭）」。',
+          marketBehavior: '良性回檔 (Healthy)：獲利了結。短線客下車，主力沒跑。特徵是「縮量、緩跌、守支撐」。\n趨勢反轉 (Reversal)：結構破壞。主力大舉倒貨或反手做空。特徵是「爆量、急跌、破關鍵點」。',
+          whenRising: [
+            '良性回檔：價格拉回時成交量顯著萎縮（惜售），K棒實體變短，且守住前波高點或重要均線（如 20MA）。',
+            '真反轉（多轉空）：高檔出現「吞噬陰線」或「長上影線」，伴隨巨大成交量（出貨），隨後跌破關鍵支撐（Lower Low）。'
+          ],
+          whenFalling: [
+            '暫時反彈（死貓跳）：空頭趨勢中，價格上漲但量能萎縮，碰到壓力位（如下彎均線）就爆量留上影線。',
+            '真反轉（空轉多）：底部出現「爆量長陽」，隨後回測不破底（Higher Low），且量能呈現「漲潮跌退」。'
+          ],
+          divergence: [
+            '回檔時指標修正：價格下跌，但 RSI 守住 40-50 區間（牛市特徵），這是良性。',
+            '反轉時指標破壞：價格小跌，但 RSI 直接跌破 40 進入弱勢區，暗示趨勢結構改變。'
+          ],
+          combinations: {
+            indicators: ['Step 7 | ATR', 'Step 6 | MA', 'Fibonacci'],
+            reason: '用 Fibonacci 測量深度（回檔通常在 0.382/0.5 止住），用 ATR 測量恐慌（良性回檔 ATR 不會暴增），用 MA 確認趨勢防線。'
+          },
+          pitfalls: [
+            '緩跌也是跌：不要以為量縮就不會死。如果價格「緩步」跌破關鍵支撐（溫水煮青蛙），這也是反轉，叫「盤跌」。',
+            'V轉騙局：急跌後急拉（V轉）雖然強勢，但如果沒有經過「二次回測（打腳）」，很容易失敗。'
+          ],
+          usageInStep: {
+            role: 'Screening',
+            description: '持倉診斷。當我手上的股票下跌，我會檢查：1. 有爆量嗎？ 2. 破支撐了嗎？ 如果都沒有，我就抱著（良性）。如果有，我立刻跑（反轉）。'
+          },
+          coachNote: '回檔是彎腰撿鑽石，反轉是高樓掉磚頭。區別在於：鑽石在地上（支撐）會發光，磚頭砸到地上（支撐）會碎掉。'
         }
       },
       {
@@ -147,7 +183,7 @@ export const tradingData: StepCategory[] = [
           definition: '衝關的燃料。突破關鍵壓力區（箱型頂、頸線）時，資金的「決心」。',
           marketBehavior: '真突破：眾志成城。大戶發動，散戶跟進，賣壓被全數吃光。\n假突破：誘敵深入。主力故意拉過關卡吸引技術派追價，然後反手倒貨。',
           whenRising: [
-            '有效突破：成交量必須顯著放大（通常大於 5日均量 的 1.5倍以上），且收盤要收在壓力區之上（實體紅K）。'
+            '有效突破：成交量必須顯著放大（通常大於 5日均量 的 1.5倍以上），且收盤要收在壓力區之上（實體陽線）。'
           ],
           whenFalling: [
             '假突破（Trap）：突破當下量能不足（無量過高），或是爆出天量但留長上影線（主力出貨）。隨後價格跌回壓力區之下。'
@@ -185,7 +221,7 @@ export const tradingData: StepCategory[] = [
             '量價背離前兆：雖然現在有量，但如果價格推升幅度越來越小（K棒變短），代表阻力極大。'
           ],
           whenFalling: [
-            '烏雲蓋頂：爆量當天收長黑 K 或長上影線，這是明確的「主力落跑」訊號。',
+            '烏雲蓋頂：爆量當天收長陰線（美股 Red K）或長上影線，這是明確的「主力落跑」訊號。',
             '高檔震盪：爆量後價格不漲不跌，在高檔橫盤，這是主力在慢慢出貨。'
           ],
           divergence: [
@@ -193,7 +229,7 @@ export const tradingData: StepCategory[] = [
           ],
           combinations: {
             indicators: ['Step 3 | A/D 線', 'Candlestick'],
-            reason: '看 A/D 線是否背離。如果爆量收紅 K，但 A/D 線卻往下掉，代表是為了拉高出貨（收盤雖紅但相對弱勢）。'
+            reason: '看 A/D 線是否背離。如果爆量收陽線，但 A/D 線卻往下掉，代表是為了拉高出貨（收盤雖漲但相對弱勢）。'
           },
           pitfalls: [
             '換手再上：強勢股有時候會高檔爆量換手（新主力進場接走舊主力的貨），然後繼續漲。區別在於：換手後的價格「不能跌破爆量低點」。'
@@ -219,7 +255,7 @@ export const tradingData: StepCategory[] = [
             '止跌訊號：爆量後，價格不再創新低，開始進入盤整打底。'
           ],
           whenFalling: [
-            '最後一殺：有時候爆量長黑後，還會再慣性下跌幾天，這叫「誘空」或「甩轎」。'
+            '最後一殺：有時候爆量長陰線後，還會再慣性下跌幾天，這叫「誘空」或「甩轎」。'
           ],
           divergence: [
             '底背離：價格可能還在測底，但 RSI 或 OBV 已經偷偷墊高。'
@@ -237,6 +273,41 @@ export const tradingData: StepCategory[] = [
             description: '列入觀察名單。低檔爆量後，我不會馬上買，我會等它「不再破底」並「站上爆量K線高點」才進場。'
           },
           coachNote: '別人的停損點，是你的進場點。但請確認那真的是最後一滴血（爆量不跌）。'
+        }
+      },
+      {
+        id: 's1-plunge-bounce',
+        title: '暴跌真假回彈 (Real vs. Fake Bounce)',
+        stepId: 'step-1',
+        stepName: 'Step 1 | 價量行為',
+        tags: ['Reversal', 'Trap', 'Panic'],
+        content: {
+          definition: '急跌後的修復機制。重點在於區分這是「逃命波（死貓跳）」還是真正的「V型反轉」。',
+          marketBehavior: '假回彈（死貓跳）：空單回補（Short Covering）。殺低的人獲利了結，導致價格暫時上浮，但沒有新買盤。\n真回彈（反轉）：主力進場。在絕望恐慌中，有大資金願意承接所有拋售，並強勢推升。',
+          whenRising: [
+            '假回彈：無量上漲。價格雖然陽線反彈，但成交量比下跌時縮小很多。通常彈到 0.382 或 0.5 黃金分割位就上不去。',
+            '真回彈：報復性反擊。第一根反彈陽線必須「爆量」，且實體要長，最好直接吞噬掉前一根下跌陰線。'
+          ],
+          whenFalling: [
+            '二次測底（Retest）：回彈後的下跌才是關鍵。如果量縮且不破前低（Higher Low），這才是真正的進場點（第二隻腳）。',
+            '假回彈後的下跌：通常會帶量跌破前低，開啟新一輪殺戮。'
+          ],
+          divergence: [
+            '價格創新低，但 RSI 沒有創新低（底背離）。這是判斷真回彈最強力的濾網。'
+          ],
+          combinations: {
+            indicators: ['Step 5 | RSI', 'Step 7 | ATR', 'Fibonacci'],
+            reason: 'ATR 顯示恐慌極值，RSI 給出背離訊號，Fibonacci 測量反彈強弱。三者合一才能接刀。'
+          },
+          pitfalls: [
+            '接第一根反彈：勝率極低。因為你不知道那是反彈還是中繼休息。',
+            'V轉的迷思：真正的V轉（單腳反轉）很少見，通常需要時間打底。'
+          ],
+          usageInStep: {
+            role: 'Braking',
+            description: '踩煞車。看到暴跌後的陽線，先假設它是「假的」。除非我看到「爆量吞噬」或者「縮量回測不破底」，否則絕不進場。'
+          },
+          coachNote: '不要接掉下來的刀子，等它插在地上不動了，甚至生鏽了（量縮盤整），再去拔。'
         }
       },
       {
@@ -278,7 +349,7 @@ export const tradingData: StepCategory[] = [
         tags: ['Pattern', 'Quality', 'Psychology'],
         content: {
           definition: '市場的呼吸與心跳。看趨勢運行的「流暢度」與「規律性」。',
-          marketBehavior: '節奏推進（好）：控盤者很有信心，股價沿著均線（如 10MA）穩步推升，紅K多黑K少，回檔淺且快。\n節奏混亂（壞）：控盤者猶豫或多空分歧大，K棒忽長忽短，影線亂飛，漲一天跌三天（心電圖）。',
+          marketBehavior: '節奏推進（好）：控盤者很有信心，股價沿著均線（如 10MA）穩步推升，陽線多陰線少，回檔淺且快。\n節奏混亂（壞）：控盤者猶豫或多空分歧大，K棒忽長忽短，影線亂飛，漲一天跌三天（心電圖）。',
           whenRising: [
             '階梯式上漲：漲三退一，底部不斷墊高，量能配合完美（漲出量、跌縮量）。',
             '加速趕頂：原本穩定的節奏突然變快（角度變陡），通常是行情結束的前兆。'
@@ -478,7 +549,7 @@ export const tradingData: StepCategory[] = [
             '出貨訊號：價格創新高，A/D 線卻創新低，這是比 OBV 更敏感的出貨訊號。'
           ],
           divergence: [
-            'A/D 背離通常比 OBV 早發生。因為 OBV 只要收紅就全加，但 A/D 會看你「收在哪裡」。如果是長上影線的紅 K，OBV 會漲，但 A/D 會跌（因為收在低點），這時候 A/D 才是對的。'
+            'A/D 背離通常比 OBV 早發生。因為 OBV 只要收漲就全加，但 A/D 會看你「收在哪裡」。如果是長上影線的陽線，OBV 會漲，但 A/D 會跌（因為收在低點），這時候 A/D 才是對的。'
           ],
           combinations: { 
             indicators: ['Step 2 | OBV', 'Candlestick'], 
@@ -572,7 +643,7 @@ export const tradingData: StepCategory[] = [
             reason: 'RSI 必須搭配趨勢判斷。趨勢盤看鈍化（抱單），震盪盤看背離（轉折）。搞混會死很慘。' 
           },
           pitfalls: [
-            '強勢趨勢中的「超買」誤區：新手最常死在「RSI > 70 放空」。在主升段，RSI 可以掛在 80 很久，你會被軋上天。',
+            '強勢趨勢中的「超買」誤區：新手常死在「RSI > 70 放空」。在主升段，RSI 可以掛在 80 很久，你會被軋上天。',
             '震盪盤：RSI 會頻繁在 30-70 來回，這時候可以用來做高拋低吸，但一旦趨勢出來要立刻停手。'
           ],
           usageInStep: { 
@@ -708,7 +779,7 @@ export const tradingData: StepCategory[] = [
           divergence: ['N/A'],
           combinations: {
             indicators: ['Step 5 | RSI', 'Candlestick'],
-            reason: '當正乖離過大 + RSI 背離 + 出現長黑 K，這是勝率極高的短線回檔訊號。'
+            reason: '當正乖離過大 + RSI 背離 + 出現長陰線 (Red K)，這是勝率極高的短線回檔訊號。'
           },
           pitfalls: [
             '強勢股的鈍化：在超級飆股身上，價格可以長期維持大乖離（沿著 5MA 噴），這時候去空它會死得很慘。逆勢操作乖離要非常小心。'
@@ -738,7 +809,7 @@ export const tradingData: StepCategory[] = [
           definition: 'ATR 在看的是：市場的「情緒波動」與「合理活動範圍」。它完全不告訴你方向，只告訴你「躁動程度」。',
           marketBehavior: 'ATR 是市場的「心跳」或「分貝計」。\nATR 高：市場情緒激動、恐慌或貪婪，K 棒很長，洗刷劇烈。\nATR 低：市場情緒平靜、觀望，K 棒很短。',
           whenRising: [
-            '變盤前兆或趨勢加速：通常伴隨大成交量。如果是低檔爆量長黑+ATR暴增，可能是恐慌趕底。',
+            '變盤前兆或趨勢加速：通常伴隨大成交量。如果是低檔爆量長陰線+ATR暴增，可能是恐慌趕底。',
             '風險增加：原本 10 點的波動變 50 點，你的停損距離必須拉大，部位必須縮小。'
           ],
           whenFalling: [
